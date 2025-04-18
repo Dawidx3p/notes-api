@@ -4,6 +4,6 @@ import { open } from 'sqlite';
 export async function openDb() {
   return open({
     filename: './data.db',
-    driver: sqlite3.Database
+    driver: sqlite3.cached.Database
   });
 }
