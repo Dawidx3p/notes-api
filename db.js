@@ -1,9 +1,9 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
+import pkg from 'pg';
+const { Pool } = pkg;
 
-export async function openDb() {
-  return open({
-    filename: './data.db',
-    driver: sqlite3.cached.Database
-  });
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
+export default pool;
