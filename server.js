@@ -35,8 +35,8 @@ app.get('/api/notes', async (req, res) => {
 });
 
 app.post('/api/notes', async (req, res) => {
-  const { title, content } = req.body;
-  await pool.query('INSERT INTO notes (title, content) VALUES ($1, $2)', [title, content]);
+  const { title, content, image } = req.body;
+  await pool.query('INSERT INTO notes (title, content, image) VALUES ($1, $2, $3)', [title, content, image]);
   res.status(201).json({ message: 'Notatka dodana' });
 });
 
