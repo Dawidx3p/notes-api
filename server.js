@@ -64,9 +64,12 @@ app.post('/api/tasks', async (req, res) => {
   res.status(201).json({ message: 'Zadanie dodane' });
 });
 
-app.put('/api/tasks/:id', async (req, res) => {
-  const { done } = req.body;
-  await pool.query('UPDATE tasks SET done = $1 WHERE id = $2', [done, req.params.id]);
+app.put('/api/notes/:id', async (req, res) => {
+  const { title, content, image } = req.body;
+  await pool.query(
+    'UPDATE notes SET title = $1, content = $2, image = $3 WHERE id = $4',
+    [title, content, image, req.params.id]
+  );
   res.json({ message: 'Zaktualizowano' });
 });
 
