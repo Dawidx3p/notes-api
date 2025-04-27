@@ -58,18 +58,15 @@ app.get('/api/tasks', async (req, res) => {
   res.json(result.rows);
 });
 
-app.post('/api/tasks', async (req, res) => {
-  const { text, type } = req.body;
-  await pool.query('INSERT INTO tasks (text, type, done) VALUES ($1, $2, false)', [text, type]);
-  res.status(201).json({ message: 'Zadanie dodane' });
+app.post('/api/notes', async (req, res) => {
+  const { title, content, image } = req.body;
+  await pool.query('INSERT INTO notes (title, content, image) VALUES ($1, $2, $3)', [title, content, image]);
+  res.status(201).json({ message: 'Notatka dodana' });
 });
 
 app.put('/api/notes/:id', async (req, res) => {
   const { title, content, image } = req.body;
-  await pool.query(
-    'UPDATE notes SET title = $1, content = $2, image = $3 WHERE id = $4',
-    [title, content, image, req.params.id]
-  );
+  await pool.query('UPDATE notes SET title = $1, content = $2, image = $3 WHERE id = $4', [title, content, image, req.params.id]);
   res.json({ message: 'Zaktualizowano' });
 });
 
