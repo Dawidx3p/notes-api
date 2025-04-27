@@ -14,7 +14,8 @@ const init = async () => {
     CREATE TABLE IF NOT EXISTS notes (
       id SERIAL PRIMARY KEY,
       title TEXT,
-      content TEXT
+      content TEXT,
+      image TEXT
     );
   `);
   await pool.query(`
